@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Intranet Home</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f172a;
+      --panel: #111827;
+      --panel-light: #1f2937;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --accent: #22d3ee;
+      --accent-2: #a855f7;
+      --success: #34d399;
+      --warning: #f59e0b;
+      --danger: #f87171;
+      --radius: 14px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: radial-gradient(circle at 10% 20%, rgba(34, 211, 238, 0.12), transparent 25%),
+                  radial-gradient(circle at 90% 10%, rgba(168, 85, 247, 0.12), transparent 25%),
+                  radial-gradient(circle at 30% 80%, rgba(52, 211, 153, 0.1), transparent 20%),
+                  var(--bg);
+      color: var(--text);
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+
+    .page {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 32px 20px 48px;
+    }
+
+    header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 16px;
+      align-items: center;
+      margin-bottom: 28px;
+    }
+
+    header .title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 28px;
+      font-weight: 700;
+    }
+
+    header .badge {
+      background: linear-gradient(135deg, rgba(34, 211, 238, 0.2), rgba(168, 85, 247, 0.2));
+      color: var(--accent);
+      padding: 8px 12px;
+      border-radius: var(--radius);
+      font-weight: 600;
+      border: 1px solid rgba(34, 211, 238, 0.35);
+    }
+
+    header .datetime {
+      text-align: right;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .grid.columns-3 {
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+
+    .grid.columns-2 {
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+
+    .card {
+      background: linear-gradient(135deg, rgba(17, 24, 39, 0.95), rgba(17, 24, 39, 0.8));
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+      backdrop-filter: blur(6px);
+    }
+
+    .card h2 {
+      margin: 0 0 12px;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .card h2 span.icon {
+      width: 32px;
+      height: 32px;
+      display: grid;
+      place-items: center;
+      background: rgba(34, 211, 238, 0.12);
+      color: var(--accent);
+      border-radius: 10px;
+      border: 1px solid rgba(34, 211, 238, 0.35);
+      font-size: 16px;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.5;
+      font-size: 14px;
+    }
+
+    .hero {
+      padding: 22px;
+      border: 1px solid rgba(34, 211, 238, 0.35);
+      background: linear-gradient(135deg, rgba(34, 211, 238, 0.16), rgba(17, 24, 39, 0.9));
+    }
+
+    .hero h2 {
+      font-size: 20px;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 12px 0;
+    }
+
+    .chip {
+      background: var(--panel-light);
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      color: var(--muted);
+      font-size: 13px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .chip .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      display: inline-block;
+    }
+
+    .quick-links, .dept-list, .resource-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .quick-links a, .resource-list button, .resource-list a {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      text-decoration: none;
+      padding: 12px 14px;
+      color: var(--text);
+      background: var(--panel-light);
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      transition: transform 0.2s ease, border-color 0.2s ease;
+      font-size: 14px;
+    }
+
+    .resource-list button, .resource-list a {
+      color: var(--text);
+    }
+
+    .quick-links a:hover, .resource-list button:hover, .resource-list a:hover {
+      transform: translateY(-2px);
+      border-color: rgba(34, 211, 238, 0.35);
+    }
+
+    .quick-links a span, .resource-list button span, .resource-list a span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .pill {
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .pill.success { background: rgba(52, 211, 153, 0.12); color: #a7f3d0; }
+    .pill.warning { background: rgba(245, 158, 11, 0.12); color: #fcd34d; }
+    .pill.info { background: rgba(34, 211, 238, 0.12); color: #67e8f9; }
+    .pill.danger { background: rgba(248, 113, 113, 0.12); color: #fecdd3; }
+
+    .announcement {
+      padding: 12px;
+      background: var(--panel-light);
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .announcement strong {
+      color: var(--text);
+    }
+
+    .announcement span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .table-like {
+      display: grid;
+      gap: 12px;
+    }
+
+    .table-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr auto;
+      gap: 10px;
+      align-items: center;
+      padding: 10px;
+      background: var(--panel-light);
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .table-row .label { color: var(--text); font-weight: 600; }
+    .table-row .meta { color: var(--muted); font-size: 13px; }
+
+    .search {
+      position: relative;
+      margin: 10px 0 14px;
+    }
+
+    .search input {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      background: var(--panel-light);
+      color: var(--text);
+      font-size: 14px;
+      outline: none;
+    }
+
+    .footer {
+      margin-top: 20px;
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+    }
+
+    @media (max-width: 720px) {
+      header { grid-template-columns: 1fr; }
+      header .datetime { text-align: left; }
+      .table-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="title">
+        <div class="badge">Intranet</div>
+        <div>
+          <h1>Company Hub</h1>
+          <div style="color: var(--muted); font-size: 14px;">Resources, updates, and quick actions in one place.</div>
+        </div>
+      </div>
+      <div class="datetime" id="datetime"></div>
+    </header>
+
+    <section class="card hero">
+      <h2><span class="icon">⚡</span>Welcome back</h2>
+      <p>Stay aligned with company news, access key tools, and collaborate across teams.</p>
+      <div class="chips">
+        <div class="chip"><span class="dot"></span>All systems operational</div>
+        <div class="chip"><span class="dot" style="background: var(--warning);"></span>Quarterly review due May 31</div>
+        <div class="chip"><span class="dot" style="background: var(--accent-2);"></span>Hybrid office week</div>
+      </div>
+    </section>
+
+    <div class="grid columns-3" style="margin-top: 18px;">
+      <div class="card">
+        <h2><span class="icon">📢</span>Announcements</h2>
+        <div class="table-like">
+          <div class="announcement">
+            <div>
+              <strong>Security training refresh</strong><br>
+              <span>Complete the 15-minute module by Friday.</span>
+            </div>
+            <div class="pill warning">Due</div>
+          </div>
+          <div class="announcement">
+            <div>
+              <strong>Summer schedule</strong><br>
+              <span>Fridays end at 2pm starting next week.</span>
+            </div>
+            <div class="pill success">New</div>
+          </div>
+          <div class="announcement">
+            <div>
+              <strong>Office Wi-Fi update</strong><br>
+              <span>IT will rotate credentials on Wednesday at 6pm.</span>
+            </div>
+            <div class="pill info">Info</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2><span class="icon">🗂️</span>Quick Links</h2>
+        <div class="quick-links">
+          <a href="#">
+            HR Portal
+            <span>Benefits, PTO, payroll</span>
+          </a>
+          <a href="#">
+            IT Help Desk
+            <span>Open or view tickets</span>
+          </a>
+          <a href="#">
+            Policies
+            <span>Security, compliance, travel</span>
+          </a>
+          <a href="#">
+            Facilities
+            <span>Book rooms and desks</span>
+          </a>
+          <a href="#">
+            Learning
+            <span>Courses and certifications</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2><span class="icon">📅</span>Events</h2>
+        <div class="table-like">
+          <div class="table-row">
+            <div class="label">All Hands</div>
+            <div class="meta">Thursday · 10:00 AM</div>
+            <div class="pill info">Streaming</div>
+          </div>
+          <div class="table-row">
+            <div class="label">Security AMA</div>
+            <div class="meta">Friday · 2:00 PM</div>
+            <div class="pill success">Open Q&A</div>
+          </div>
+          <div class="table-row">
+            <div class="label">Design Critique</div>
+            <div class="meta">Monday · 4:00 PM</div>
+            <div class="pill warning">Limited seats</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid columns-2" style="margin-top: 18px;">
+      <div class="card">
+        <h2><span class="icon">📚</span>Team Directory</h2>
+        <p>Find the right contact by team and availability.</p>
+        <div class="search">
+          <input type="text" id="team-search" placeholder="Filter by team or name" aria-label="Search team directory">
+        </div>
+        <div class="dept-list" id="team-directory" aria-live="polite"></div>
+      </div>
+
+      <div class="card">
+        <h2><span class="icon">🧭</span>Resource Finder</h2>
+        <p>Search guides, forms, and playbooks.</p>
+        <div class="search">
+          <input type="text" id="search" placeholder="Search resources (e.g. expense policy, onboarding)" aria-label="Search resources">
+        </div>
+        <div class="resource-list" id="resources" aria-live="polite"></div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top: 18px;">
+      <h2><span class="icon">🛠️</span>Systems Status</h2>
+      <div class="grid columns-3">
+        <div class="announcement">
+          <div>
+            <strong>VPN</strong><br>
+            <span>Primary gateway healthy</span>
+          </div>
+          <div class="pill success">Operational</div>
+        </div>
+        <div class="announcement">
+          <div>
+            <strong>File Storage</strong><br>
+            <span>Maintenance window Fri 8pm</span>
+          </div>
+          <div class="pill warning">Scheduled</div>
+        </div>
+        <div class="announcement">
+          <div>
+            <strong>Analytics</strong><br>
+            <span>Increased latency in EU region</span>
+          </div>
+          <div class="pill danger">Degraded</div>
+        </div>
+        <div class="announcement">
+          <div>
+            <strong>Mail</strong><br>
+            <span>Queued deliveries cleared</span>
+          </div>
+          <div class="pill success">Operational</div>
+        </div>
+        <div class="announcement">
+          <div>
+            <strong>Chat</strong><br>
+            <span>Rolling out message reactions</span>
+          </div>
+          <div class="pill info">Update</div>
+        </div>
+        <div class="announcement">
+          <div>
+            <strong>Directory</strong><br>
+            <span>New groups synced hourly</span>
+          </div>
+          <div class="pill success">Operational</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">Built for your team — customize links, add services, and pin announcements that matter most.</div>
+  </div>
+
+  <script>
+    const resourceData = [
+      { title: 'Expense Policy', category: 'Finance', link: '#', tags: ['Travel', 'Meals'] },
+      { title: 'New Hire Onboarding', category: 'People Operations', link: '#', tags: ['Checklist', 'IT setup'] },
+      { title: 'Security Handbook', category: 'Security', link: '#', tags: ['Policies', 'Access'] },
+      { title: 'Brand Assets', category: 'Design', link: '#', tags: ['Logos', 'Templates'] },
+      { title: 'Remote Work Playbook', category: 'People Operations', link: '#', tags: ['Hybrid', 'Guides'] },
+      { title: 'Quarterly OKR Template', category: 'Leadership', link: '#', tags: ['Planning'] },
+      { title: 'Travel Request Form', category: 'Finance', link: '#', tags: ['Booking', 'Reimbursement'] },
+      { title: 'Incident Runbook', category: 'IT', link: '#', tags: ['Support', 'Outage'] },
+    ];
+
+    const teamData = [
+      { team: 'People Operations', contact: 'Alex Rivera', email: 'alex@company.com', status: 'Available', badge: 'success' },
+      { team: 'IT Support', contact: 'Jordan Smith', email: 'it-support@company.com', status: 'On call', badge: 'info' },
+      { team: 'Finance', contact: 'Priya Shah', email: 'finance@company.com', status: 'EOD replies', badge: 'warning' },
+      { team: 'Facilities', contact: 'Taylor Lee', email: 'facilities@company.com', status: 'Available', badge: 'success' },
+      { team: 'Security', contact: 'Morgan Patel', email: 'security@company.com', status: 'Available', badge: 'success' },
+      { team: 'Design', contact: 'Samira Chen', email: 'design@company.com', status: 'Heads down', badge: 'warning' },
+    ];
+
+    const resourcesEl = document.getElementById('resources');
+    const searchInput = document.getElementById('search');
+    const teamEl = document.getElementById('team-directory');
+    const teamSearchInput = document.getElementById('team-search');
+
+    function renderResources(filter = '') {
+      const term = filter.trim().toLowerCase();
+      resourcesEl.innerHTML = '';
+      const filtered = resourceData.filter(item => {
+        const text = `${item.title} ${item.category} ${item.tags.join(' ')}`.toLowerCase();
+        return text.includes(term);
+      });
+
+      if (!filtered.length) {
+        resourcesEl.innerHTML = '<p style="color: var(--muted); margin: 4px 0 0;">No resources found.</p>';
+        return;
+      }
+
+      filtered.forEach(item => {
+        const anchor = document.createElement('a');
+        anchor.href = item.link;
+        anchor.target = '_blank';
+        anchor.rel = 'noreferrer';
+        anchor.innerHTML = `
+          <div>
+            <div style="font-weight: 600;">${item.title}</div>
+            <span>${item.category} · ${item.tags.join(', ')}</span>
+          </div>
+          <span style="color: var(--accent);">Open</span>
+        `;
+        resourcesEl.appendChild(anchor);
+      });
+    }
+
+    renderResources();
+
+    searchInput.addEventListener('input', (e) => {
+      renderResources(e.target.value);
+    });
+
+    function renderTeams(filter = '') {
+      const term = filter.trim().toLowerCase();
+      teamEl.innerHTML = '';
+      const filtered = teamData.filter(item => {
+        const text = `${item.team} ${item.contact} ${item.status}`.toLowerCase();
+        return text.includes(term);
+      });
+
+      if (!filtered.length) {
+        teamEl.innerHTML = '<p style="color: var(--muted); margin: 4px 0 0;">No matching teams.</p>';
+        return;
+      }
+
+      filtered.forEach(item => {
+        const row = document.createElement('div');
+        row.className = 'table-row';
+        row.innerHTML = `
+          <div class="label">${item.team}</div>
+          <div class="meta">${item.contact} · <a href="mailto:${item.email}" style="color: var(--accent); text-decoration: none;">${item.email}</a></div>
+          <div class="pill ${item.badge}">${item.status}</div>
+        `;
+        teamEl.appendChild(row);
+      });
+    }
+
+    renderTeams();
+    teamSearchInput.addEventListener('input', (e) => {
+      renderTeams(e.target.value);
+    });
+
+    function updateTime() {
+      const now = new Date();
+      const options = { weekday: 'long', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' };
+      document.getElementById('datetime').textContent = now.toLocaleString(undefined, options);
+    }
+
+    updateTime();
+    setInterval(updateTime, 60000);
+  </script>
+</body>
+</html>
