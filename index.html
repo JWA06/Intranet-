@@ -9,14 +9,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #f2f5f9;
+      --bg: #f5f7fb;
       --panel: #ffffff;
-      --panel-light: #f7f9fc;
-      --text: #0f1728;
-      --muted: #4a5568;
-      --accent: #1b3d6b;
-      --accent-2: #5fa8d3;
-      --accent-3: #107f2f;
+      --panel-light: #eef3fb;
+      --text: #0f172a;
+      --muted: #4a5873;
+      --accent: #192c4d;
+      --accent-2: #87bee8;
+      --accent-3: #a3ee3b;
       --success: #0f9d58;
       --warning: #c26b00;
       --danger: #c0392b;
@@ -30,7 +30,8 @@
     body {
       margin: 0;
       min-height: 100vh;
-      background: var(--bg);
+      background: radial-gradient(circle at 12% 18%, rgba(135, 190, 232, 0.12) 0, rgba(135, 190, 232, 0) 22%),
+        linear-gradient(180deg, #f5f7fb 0%, #ffffff 30%, #f5f7fb 100%);
       color: var(--text);
       font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       line-height: 1.7;
@@ -208,10 +209,74 @@
       background: rgba(135, 190, 232, 0.14);
     }
 
+    .brand-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 12px 16px;
+      background: linear-gradient(135deg, #0f223d 0%, #192c4d 70%);
+      color: #e8f1ff;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 10px 30px rgba(10, 24, 44, 0.28);
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-logo .logo-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: #87bee8;
+      color: #0f223d;
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      letter-spacing: 0.4px;
+      box-shadow: 0 10px 25px rgba(135, 190, 232, 0.35);
+    }
+
+    .brand-name {
+      font-weight: 800;
+      font-size: 17px;
+      letter-spacing: 0.4px;
+    }
+
+    .brand-tagline {
+      font-size: 13px;
+      color: rgba(232, 241, 255, 0.9);
+    }
+
+    .brand-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: flex-end;
+      font-size: 14px;
+    }
+
+    .brand-nav a {
+      color: #e8f1ff;
+      text-decoration: none;
+      padding: 8px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(232, 241, 255, 0.18);
+      transition: background 0.15s ease, transform 0.15s ease;
+    }
+
+    .brand-nav a:hover {
+      background: rgba(135, 190, 232, 0.2);
+      transform: translateY(-1px);
+    }
+
     .page {
-      max-width: 1080px;
+      max-width: 1140px;
       margin: 0 auto;
-      padding: 28px 16px 48px;
+      padding: 24px 16px 48px;
     }
 
     header {
@@ -237,12 +302,12 @@
     }
 
     header .badge {
-      background: #e7eff8;
-      color: var(--accent);
+      background: #192c4d;
+      color: #f4f7ff;
       padding: 8px 12px;
       border-radius: var(--radius);
       font-weight: 700;
-      border: 1px solid #c8d4e5;
+      border: 1px solid rgba(255, 255, 255, 0.18);
       text-transform: uppercase;
       letter-spacing: 0.4px;
     }
@@ -268,7 +333,7 @@
 
     .card {
       background: var(--panel);
-      border: 1px solid #d6deea;
+      border: 1px solid #d8e2f1;
       border-radius: var(--radius);
       padding: 18px;
       box-shadow: 0 12px 32px rgba(15, 23, 40, 0.08);
@@ -292,6 +357,7 @@
       border-radius: 10px;
       border: 1px solid #c8d4e5;
       font-size: 16px;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
     }
 
     .card p {
@@ -302,21 +368,30 @@
     }
 
     .hero {
-      padding: 22px;
-      border: 1px solid #d6deea;
-      background: var(--panel-light);
+      padding: 24px;
+      border: 1px solid #d8e2f1;
+      background: linear-gradient(120deg, rgba(25, 44, 77, 0.96), rgba(25, 44, 77, 0.82));
       position: relative;
       overflow: hidden;
+      color: #f4f7ff;
     }
 
     .hero::after {
-      display: none;
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 12% 20%, rgba(135, 190, 232, 0.35) 0, rgba(135, 190, 232, 0) 40%),
+        radial-gradient(circle at 80% 10%, rgba(135, 190, 232, 0.18) 0, rgba(135, 190, 232, 0) 34%);
+      pointer-events: none;
     }
 
     .hero h2 {
       font-size: 24px;
       font-family: 'Barlow Condensed', 'Inter', system-ui, sans-serif;
       letter-spacing: 0.4px;
+      margin-bottom: 6px;
+      position: relative;
+      z-index: 1;
     }
 
     .hero .tagline {
@@ -324,6 +399,14 @@
       margin: 8px 0 14px;
       font-family: 'Barlow Condensed', 'Inter', system-ui, sans-serif;
       letter-spacing: 0.4px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero p {
+      position: relative;
+      z-index: 1;
+      color: rgba(244, 247, 255, 0.92);
     }
 
     .chips {
@@ -331,14 +414,16 @@
       flex-wrap: wrap;
       gap: 10px;
       margin: 12px 0;
+      position: relative;
+      z-index: 1;
     }
 
     .chip {
-      background: #e7eff8;
+      background: rgba(255, 255, 255, 0.12);
       padding: 10px 12px;
       border-radius: 999px;
-      border: 1px solid #c8d4e5;
-      color: var(--muted);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      color: #f4f7ff;
       font-size: 14px;
       display: inline-flex;
       align-items: center;
@@ -349,7 +434,7 @@
       width: 10px;
       height: 10px;
       border-radius: 50%;
-      background: var(--accent);
+      background: var(--accent-2);
       display: inline-block;
     }
 
@@ -367,8 +452,8 @@
       color: var(--text);
       background: var(--panel-light);
       border-radius: 10px;
-      border: 1px solid rgba(255, 255, 255, 0.04);
-      transition: transform 0.2s ease, border-color 0.2s ease;
+      border: 1px solid #d8e2f1;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
       font-size: 14px;
     }
 
@@ -378,7 +463,8 @@
 
     .quick-links a:hover, .resource-list button:hover, .resource-list a:hover {
       transform: translateY(-2px);
-      border-color: rgba(34, 211, 238, 0.35);
+      border-color: var(--accent-2);
+      box-shadow: 0 8px 18px rgba(25, 44, 77, 0.12);
     }
 
     .quick-links a span, .resource-list button span, .resource-list a span {
@@ -399,6 +485,83 @@
     .pill.success { background: #e6f4ea; color: var(--success); border: 1px solid #c4e3cd; }
     .pill.warning { background: #fff4e5; color: var(--warning); border: 1px solid #ffd9a1; }
     .pill.info { background: #e7eff8; color: var(--accent); border: 1px solid #c8d4e5; }
+
+    .note-panel {
+      background: var(--panel);
+      border: 1px solid #d6deea;
+      border-radius: var(--radius);
+      padding: 18px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .note-panel h3 { margin: 0; font-size: 18px; letter-spacing: 0.3px; }
+
+    .note-panel form { display: grid; gap: 10px; }
+
+    .note-panel input,
+    .note-panel textarea,
+    .note-panel select {
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid #c8d4e5;
+      background: #fff;
+      font-size: 15px;
+      color: var(--text);
+    }
+
+    .note-panel textarea { min-height: 70px; resize: vertical; }
+
+    .note-panel button {
+      justify-self: flex-start;
+      padding: 12px 14px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 10px 25px rgba(27, 61, 107, 0.2);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .note-panel button:hover { transform: translateY(-1px); box-shadow: 0 14px 28px rgba(27, 61, 107, 0.24); }
+
+    .notes-list { display: grid; gap: 10px; }
+
+    .note-card {
+      border: 1px solid #d6deea;
+      border-radius: 10px;
+      padding: 12px;
+      background: var(--panel-light);
+      display: grid;
+      gap: 6px;
+    }
+
+    .note-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .note-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+
+    .note-actions button {
+      padding: 8px 10px;
+      background: #fff;
+      color: var(--text);
+      border: 1px solid #c8d4e5;
+      box-shadow: none;
+    }
+
+    .note-actions button.complete { background: rgba(16, 127, 47, 0.12); border-color: rgba(16, 127, 47, 0.4); color: var(--success); }
+
+    .note-actions button.delete { background: rgba(192, 57, 43, 0.08); border-color: rgba(192, 57, 43, 0.35); color: var(--danger); }
     .pill.danger { background: #fdecea; color: var(--danger); border: 1px solid #f5c6c1; }
 
     .announcement {
@@ -502,9 +665,25 @@
             <span class="chip" aria-live="polite">Need help? Call reception and ask for the Truckcraft intranet code.</span>
           </div>
         </div>
-        <div class="helper">Lost the code? Contact IT &amp; Security to reset access. For now, you can use the temporary code button above.</div>
-      </form>
+      <div class="helper">Lost the code? Contact IT &amp; Security to reset access. For now, you can use the temporary code button above.</div>
+    </form>
+  </div>
+</div>
+
+  <div class="brand-bar hidden" id="brand-bar" aria-hidden="true">
+    <div class="brand-logo">
+      <div class="logo-mark">TCB</div>
+      <div>
+        <div class="brand-name">Truckcraft Bodies</div>
+        <div class="brand-tagline">Premium in every sense. Built in Dukinfield.</div>
+      </div>
     </div>
+    <nav class="brand-nav" aria-label="Company website">
+      <a href="https://truckcraftbodies.co.uk" target="_blank" rel="noreferrer">Website</a>
+      <a href="https://truckcraftbodies.co.uk/about-us/" target="_blank" rel="noreferrer">About</a>
+      <a href="https://truckcraftbodies.co.uk/news/" target="_blank" rel="noreferrer">News</a>
+      <a href="https://truckcraftbodies.co.uk/contact-us/" target="_blank" rel="noreferrer">Contact</a>
+    </nav>
   </div>
 
   <div id="app-content" class="page hidden" aria-hidden="true">
@@ -513,7 +692,7 @@
         <div class="badge">Truckcraft Bodies</div>
         <div>
           <h1>Premium in every sense.</h1>
-          <div style="color: var(--muted); font-size: 14px;">A product by 7th Day Media · The logical choice for a job well done.</div>
+          <div style="color: var(--muted); font-size: 14px;">A manufacturer like no other · The logical choice for a job well done.</div>
         </div>
       </div>
       <div class="datetime">
@@ -524,10 +703,10 @@
 
     <section class="card hero">
       <h2><span class="icon">⚡</span>Truckcraft intranet</h2>
-      <div class="tagline">Simple daily tools for every teammate.</div>
-      <p>Use the buttons below to reach our most common systems, check today’s notes, and see who’s available. Clear text, high contrast, and large touch targets keep things friendly for everyone.</p>
+      <div class="tagline">Familiar to truckcraftbodies.co.uk, simplified for daily use.</div>
+      <p>Reach the same destinations you see on our public site—customer portal, brand hub, contact details—but with the staff tools and reminders you need to keep production flowing. Large tap targets and calm colours stay friendly for every colleague.</p>
       <div class="chips">
-        <div class="chip"><span class="dot"></span>Designed for easy reading</div>
+        <div class="chip"><span class="dot"></span>Matches the Truckcraft brand look</div>
         <div class="chip"><span class="dot" style="background: var(--warning);"></span>Need help? Contact Service Desk</div>
         <div class="chip"><span class="dot" style="background: var(--accent-3);"></span>Staff-only access is active</div>
       </div>
@@ -564,23 +743,23 @@
       <div class="card">
         <h2><span class="icon">🗂️</span>Quick Links</h2>
         <div class="quick-links">
-          <a href="#">
+          <a href="mailto:production@truckcraft.com?subject=Build%20Tracker%20update&body=Please%20add%20your%20job%20number%20and%20stage." aria-label="Email production to update the build tracker">
             Build Tracker
-            <span>Production milestones and approvals</span>
+            <span>Email production your job number</span>
           </a>
-          <a href="#">
+          <a href="https://portal.truckcraftbodies.co.uk" target="_blank" rel="noreferrer" aria-label="Open the customer portal">
             Customer Portal
             <span>Quotes, specs, aftercare</span>
           </a>
-          <a href="#">
+          <a href="https://brand.truckcraftbodies.co.uk" target="_blank" rel="noreferrer" aria-label="Open brand assets">
             Brand Assets
             <span>Logos, patterns, templates</span>
           </a>
-          <a href="#">
+          <a href="mailto:security@truckcraft.com?subject=Fleet%20Service%20Desk%20ticket" aria-label="Email Fleet Service Desk">
             Fleet Service Desk
             <span>Request support or report an issue</span>
           </a>
-          <a href="#">
+          <a href="https://intranet.truckcraftbodies.co.uk/policies" target="_blank" rel="noreferrer" aria-label="Open safety and compliance policies">
             Safety & Compliance
             <span>Policies, inductions, certifications</span>
           </a>
@@ -626,6 +805,23 @@
           <input type="text" id="search" placeholder="Search resources (e.g. brand kit, spec sheet)" aria-label="Search resources">
         </div>
         <div class="resource-list" id="resources" aria-live="polite"></div>
+      </div>
+
+      <div class="note-panel" aria-live="polite">
+        <h3>My intranet notes</h3>
+        <p style="margin: 0; color: var(--muted);">Capture quick actions for today—saved on this device only.</p>
+        <form id="note-form" aria-label="Add a personal note">
+          <input id="note-title" name="title" type="text" placeholder="What do you need to do? (e.g. Call Fleet Manager)" required>
+          <textarea id="note-body" name="body" placeholder="Optional details (truck number, customer, deadline)"></textarea>
+          <select id="note-priority" name="priority" aria-label="Choose a note priority">
+            <option value="today">Today</option>
+            <option value="week">This week</option>
+            <option value="later">Later</option>
+          </select>
+          <button type="submit">Save note</button>
+          <div id="note-feedback" class="helper" aria-live="assertive"></div>
+        </form>
+        <div class="notes-list" id="notes-list"></div>
       </div>
     </div>
 
@@ -686,6 +882,7 @@
     const ACCESS_CODE_HASH = '291c82c92e1c903d74ba42ace63d9d51ac416f092b1e27cf0584a26942e6e990';
     const DEFAULT_CODE = 'premium-in-every-sense';
     const allowedDomains = ['truckcraftbodies.co.uk', 'truckcraft.com'];
+    const NOTES_KEY = 'tcb_my_notes_v1';
 
     const gateEl = document.getElementById('access-gate');
     const gateForm = document.getElementById('gate-form');
@@ -695,6 +892,7 @@
     const gateFillDefault = document.getElementById('fill-default-code');
     const appContent = document.getElementById('app-content');
     const authMeta = document.getElementById('auth-meta');
+    const brandBar = document.getElementById('brand-bar');
 
     function emailIsAllowed(email) {
       const normalized = email.trim().toLowerCase();
@@ -747,6 +945,10 @@
 
     function showGate(message = '') {
       if (gateEl) gateEl.classList.remove('hidden');
+      if (brandBar) {
+        brandBar.classList.add('hidden');
+        brandBar.setAttribute('aria-hidden', 'true');
+      }
       if (appContent) {
         appContent.classList.add('hidden');
         appContent.setAttribute('aria-hidden', 'true');
@@ -759,6 +961,10 @@
 
     function unlock(email) {
       if (gateEl) gateEl.classList.add('hidden');
+      if (brandBar) {
+        brandBar.classList.remove('hidden');
+        brandBar.setAttribute('aria-hidden', 'false');
+      }
       if (appContent) {
         appContent.classList.remove('hidden');
         appContent.setAttribute('aria-hidden', 'false');
@@ -835,6 +1041,12 @@
     const searchInput = document.getElementById('search');
     const teamEl = document.getElementById('team-directory');
     const teamSearchInput = document.getElementById('team-search');
+    const noteForm = document.getElementById('note-form');
+    const noteTitle = document.getElementById('note-title');
+    const noteBody = document.getElementById('note-body');
+    const notePriority = document.getElementById('note-priority');
+    const noteFeedback = document.getElementById('note-feedback');
+    const notesList = document.getElementById('notes-list');
 
     function renderResources(filter = '') {
       const term = filter.trim().toLowerCase();
@@ -900,6 +1112,96 @@
     teamSearchInput.addEventListener('input', (e) => {
       renderTeams(e.target.value);
     });
+
+    function loadNotes() {
+      try {
+        const raw = localStorage.getItem(NOTES_KEY);
+        return raw ? JSON.parse(raw) : [];
+      } catch (err) {
+        console.warn('Unable to load notes', err);
+        return [];
+      }
+    }
+
+    function saveNotes(notes) {
+      try {
+        localStorage.setItem(NOTES_KEY, JSON.stringify(notes));
+      } catch (err) {
+        console.warn('Unable to save notes', err);
+      }
+    }
+
+    function renderNotes() {
+      if (!notesList) return;
+      const notes = loadNotes();
+      notesList.innerHTML = '';
+      if (!notes.length) {
+        notesList.innerHTML = '<p style="color: var(--muted); margin: 0;">No notes yet. Add your first reminder above.</p>';
+        return;
+      }
+
+      notes.forEach((note, index) => {
+        const card = document.createElement('div');
+        card.className = 'note-card';
+        const label = note.priority === 'today' ? 'Today' : note.priority === 'week' ? 'This week' : 'Later';
+        card.innerHTML = `
+          <div style="font-weight: 700;">${note.title}</div>
+          ${note.body ? `<div style="color: var(--muted);">${note.body}</div>` : ''}
+          <div class="note-meta">
+            <span>Priority: ${label}</span>
+            <span>${new Date(note.created).toLocaleString()}</span>
+          </div>
+          <div class="note-actions">
+            <button type="button" class="complete" data-index="${index}">Mark done</button>
+            <button type="button" class="delete" data-index="${index}">Delete</button>
+          </div>
+        `;
+        notesList.appendChild(card);
+      });
+
+      notesList.querySelectorAll('button.complete').forEach(btn => {
+        btn.addEventListener('click', (event) => {
+          const idx = Number(event.currentTarget.getAttribute('data-index'));
+          const updated = loadNotes();
+          updated.splice(idx, 1);
+          saveNotes(updated);
+          renderNotes();
+          if (noteFeedback) noteFeedback.textContent = 'Nice work—note marked as done.';
+        });
+      });
+
+      notesList.querySelectorAll('button.delete').forEach(btn => {
+        btn.addEventListener('click', (event) => {
+          const idx = Number(event.currentTarget.getAttribute('data-index'));
+          const updated = loadNotes();
+          updated.splice(idx, 1);
+          saveNotes(updated);
+          renderNotes();
+          if (noteFeedback) noteFeedback.textContent = 'Note removed.';
+        });
+      });
+    }
+
+    if (noteForm) {
+      renderNotes();
+      noteForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const title = (noteTitle?.value || '').trim();
+        const body = (noteBody?.value || '').trim();
+        const priority = notePriority?.value || 'today';
+        if (!title) {
+          if (noteFeedback) noteFeedback.textContent = 'Add a short title so we can save your note.';
+          return;
+        }
+        const notes = loadNotes();
+        notes.unshift({ title, body, priority, created: Date.now() });
+        saveNotes(notes.slice(0, 50));
+        renderNotes();
+        if (noteForm) noteForm.reset();
+        if (noteFeedback) noteFeedback.textContent = 'Saved locally—only you can see this on this device.';
+        noteTitle?.focus();
+      });
+    }
 
     function updateTime() {
       const now = new Date();
