@@ -3,22 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Intranet Home</title>
+  <title>Truckcraft Bodies · Intranet</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #0f172a;
-      --panel: #111827;
-      --panel-light: #1f2937;
-      --text: #e5e7eb;
-      --muted: #9ca3af;
-      --accent: #22d3ee;
-      --accent-2: #a855f7;
-      --success: #34d399;
-      --warning: #f59e0b;
-      --danger: #f87171;
+      --bg: #0c1427;
+      --panel: #111b30;
+      --panel-light: #17233d;
+      --text: #f5f7fb;
+      --muted: #a3b2ce;
+      --accent: #87bee8;
+      --accent-2: #192c4d;
+      --accent-3: #a3ee3b;
+      --success: #9ee6a6;
+      --warning: #ffd166;
+      --danger: #f59e89;
       --radius: 14px;
     }
 
@@ -29,12 +30,22 @@
     body {
       margin: 0;
       min-height: 100vh;
-      background: radial-gradient(circle at 10% 20%, rgba(34, 211, 238, 0.12), transparent 25%),
-                  radial-gradient(circle at 90% 10%, rgba(168, 85, 247, 0.12), transparent 25%),
-                  radial-gradient(circle at 30% 80%, rgba(52, 211, 153, 0.1), transparent 20%),
-                  var(--bg);
+      background: linear-gradient(145deg, rgba(25, 44, 77, 0.72), rgba(12, 20, 39, 0.95)), var(--bg);
       color: var(--text);
       font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: 
+        radial-gradient(circle at 12% 20%, rgba(135, 190, 232, 0.18), transparent 32%),
+        radial-gradient(circle at 85% 8%, rgba(163, 238, 59, 0.12), transparent 28%),
+        radial-gradient(circle at 70% 72%, rgba(25, 44, 77, 0.35), transparent 26%),
+        repeating-linear-gradient(135deg, rgba(135, 190, 232, 0.08) 0 12px, transparent 12px 24px);
+      pointer-events: none;
+      z-index: -1;
     }
 
     .page {
@@ -59,17 +70,21 @@
 
     header h1 {
       margin: 0;
-      font-size: 28px;
+      font-size: 30px;
+      font-family: 'Barlow Condensed', 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+      letter-spacing: 0.3px;
       font-weight: 700;
     }
 
     header .badge {
-      background: linear-gradient(135deg, rgba(34, 211, 238, 0.2), rgba(168, 85, 247, 0.2));
-      color: var(--accent);
+      background: linear-gradient(135deg, rgba(135, 190, 232, 0.22), rgba(25, 44, 77, 0.6));
+      color: #0b172b;
       padding: 8px 12px;
       border-radius: var(--radius);
-      font-weight: 600;
-      border: 1px solid rgba(34, 211, 238, 0.35);
+      font-weight: 700;
+      border: 1px solid rgba(135, 190, 232, 0.5);
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
     }
 
     header .datetime {
@@ -92,11 +107,11 @@
     }
 
     .card {
-      background: linear-gradient(135deg, rgba(17, 24, 39, 0.95), rgba(17, 24, 39, 0.8));
-      border: 1px solid rgba(255, 255, 255, 0.04);
+      background: linear-gradient(145deg, rgba(17, 27, 48, 0.92), rgba(12, 20, 39, 0.9));
+      border: 1px solid rgba(135, 190, 232, 0.12);
       border-radius: var(--radius);
       padding: 18px;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+      box-shadow: 0 20px 60px rgba(5, 8, 14, 0.55);
       backdrop-filter: blur(6px);
     }
 
@@ -113,10 +128,10 @@
       height: 32px;
       display: grid;
       place-items: center;
-      background: rgba(34, 211, 238, 0.12);
+      background: rgba(135, 190, 232, 0.16);
       color: var(--accent);
       border-radius: 10px;
-      border: 1px solid rgba(34, 211, 238, 0.35);
+      border: 1px solid rgba(135, 190, 232, 0.35);
       font-size: 16px;
     }
 
@@ -129,12 +144,31 @@
 
     .hero {
       padding: 22px;
-      border: 1px solid rgba(34, 211, 238, 0.35);
-      background: linear-gradient(135deg, rgba(34, 211, 238, 0.16), rgba(17, 24, 39, 0.9));
+      border: 1px solid rgba(135, 190, 232, 0.35);
+      background: linear-gradient(135deg, rgba(25, 44, 77, 0.9), rgba(135, 190, 232, 0.14));
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 78% 30%, rgba(163, 238, 59, 0.2), transparent 32%);
+      pointer-events: none;
     }
 
     .hero h2 {
-      font-size: 20px;
+      font-size: 22px;
+      font-family: 'Barlow Condensed', 'Inter', system-ui, sans-serif;
+      letter-spacing: 0.4px;
+    }
+
+    .hero .tagline {
+      font-size: 18px;
+      margin: 6px 0 14px;
+      font-family: 'Barlow Condensed', 'Inter', system-ui, sans-serif;
+      letter-spacing: 0.4px;
     }
 
     .chips {
@@ -207,16 +241,16 @@
       gap: 6px;
     }
 
-    .pill.success { background: rgba(52, 211, 153, 0.12); color: #a7f3d0; }
-    .pill.warning { background: rgba(245, 158, 11, 0.12); color: #fcd34d; }
-    .pill.info { background: rgba(34, 211, 238, 0.12); color: #67e8f9; }
-    .pill.danger { background: rgba(248, 113, 113, 0.12); color: #fecdd3; }
+    .pill.success { background: rgba(163, 238, 59, 0.14); color: #d2ffa1; }
+    .pill.warning { background: rgba(255, 209, 102, 0.16); color: #ffe7aa; }
+    .pill.info { background: rgba(135, 190, 232, 0.14); color: #d5ecff; }
+    .pill.danger { background: rgba(245, 94, 94, 0.16); color: #ffd7d1; }
 
     .announcement {
       padding: 12px;
       background: var(--panel-light);
       border-radius: 10px;
-      border: 1px solid rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(135, 190, 232, 0.08);
       display: grid;
       grid-template-columns: 1fr auto;
       gap: 8px;
@@ -245,7 +279,7 @@
       padding: 10px;
       background: var(--panel-light);
       border-radius: 10px;
-      border: 1px solid rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(135, 190, 232, 0.08);
     }
 
     .table-row .label { color: var(--text); font-weight: 600; }
@@ -260,7 +294,7 @@
       width: 100%;
       padding: 12px 14px;
       border-radius: 10px;
-      border: 1px solid rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(135, 190, 232, 0.12);
       background: var(--panel-light);
       color: var(--text);
       font-size: 14px;
@@ -285,22 +319,23 @@
   <div class="page">
     <header>
       <div class="title">
-        <div class="badge">Intranet</div>
+        <div class="badge">Truckcraft Bodies</div>
         <div>
-          <h1>Company Hub</h1>
-          <div style="color: var(--muted); font-size: 14px;">Resources, updates, and quick actions in one place.</div>
+          <h1>Premium in every sense.</h1>
+          <div style="color: var(--muted); font-size: 14px;">A product by 7th Day Media · The logical choice for a job well done.</div>
         </div>
       </div>
       <div class="datetime" id="datetime"></div>
     </header>
 
     <section class="card hero">
-      <h2><span class="icon">⚡</span>Welcome back</h2>
-      <p>Stay aligned with company news, access key tools, and collaborate across teams.</p>
+      <h2><span class="icon">⚡</span>Welcome to the Truckcraft hub</h2>
+      <div class="tagline">Premium in <em style="font-style: italic; color: var(--accent);">every sense</em> — crafted for leaders who expect the best.</div>
+      <p>Stay aligned with production updates, customer-first communications, and the tools that keep our builds moving.</p>
       <div class="chips">
-        <div class="chip"><span class="dot"></span>All systems operational</div>
-        <div class="chip"><span class="dot" style="background: var(--warning);"></span>Quarterly review due May 31</div>
-        <div class="chip"><span class="dot" style="background: var(--accent-2);"></span>Hybrid office week</div>
+        <div class="chip"><span class="dot"></span>Space Blue & Maya Blue theme enabled</div>
+        <div class="chip"><span class="dot" style="background: var(--warning);"></span>Quarterly build review · May 31</div>
+        <div class="chip"><span class="dot" style="background: var(--accent-3);"></span>Customer-first service pledge live</div>
       </div>
     </section>
 
@@ -310,24 +345,24 @@
         <div class="table-like">
           <div class="announcement">
             <div>
-              <strong>Security training refresh</strong><br>
-              <span>Complete the 15-minute module by Friday.</span>
+              <strong>Brand kit refresh</strong><br>
+              <span>Download the new Space Blue/Maya Blue pack for all proposals.</span>
             </div>
-            <div class="pill warning">Due</div>
+            <div class="pill info">Update</div>
           </div>
           <div class="announcement">
             <div>
-              <strong>Summer schedule</strong><br>
-              <span>Fridays end at 2pm starting next week.</span>
+              <strong>Customer-first pledge</strong><br>
+              <span>Voice-and-tone rollout across all outbound comms this week.</span>
             </div>
-            <div class="pill success">New</div>
+            <div class="pill success">Live</div>
           </div>
           <div class="announcement">
             <div>
-              <strong>Office Wi-Fi update</strong><br>
-              <span>IT will rotate credentials on Wednesday at 6pm.</span>
+              <strong>Photography standards</strong><br>
+              <span>Use on-site truck and team imagery—no stock photos.</span>
             </div>
-            <div class="pill info">Info</div>
+            <div class="pill warning">Reminder</div>
           </div>
         </div>
       </div>
@@ -336,24 +371,24 @@
         <h2><span class="icon">🗂️</span>Quick Links</h2>
         <div class="quick-links">
           <a href="#">
-            HR Portal
-            <span>Benefits, PTO, payroll</span>
+            Build Tracker
+            <span>Production milestones and approvals</span>
           </a>
           <a href="#">
-            IT Help Desk
-            <span>Open or view tickets</span>
+            Customer Portal
+            <span>Quotes, specs, aftercare</span>
           </a>
           <a href="#">
-            Policies
-            <span>Security, compliance, travel</span>
+            Brand Assets
+            <span>Logos, patterns, templates</span>
           </a>
           <a href="#">
-            Facilities
-            <span>Book rooms and desks</span>
+            Fleet Service Desk
+            <span>Request support or report an issue</span>
           </a>
           <a href="#">
-            Learning
-            <span>Courses and certifications</span>
+            Safety & Compliance
+            <span>Policies, inductions, certifications</span>
           </a>
         </div>
       </div>
@@ -362,17 +397,17 @@
         <h2><span class="icon">📅</span>Events</h2>
         <div class="table-like">
           <div class="table-row">
-            <div class="label">All Hands</div>
+            <div class="label">Truckcraft town hall</div>
             <div class="meta">Thursday · 10:00 AM</div>
             <div class="pill info">Streaming</div>
           </div>
           <div class="table-row">
-            <div class="label">Security AMA</div>
+            <div class="label">Customer-first AMA</div>
             <div class="meta">Friday · 2:00 PM</div>
             <div class="pill success">Open Q&A</div>
           </div>
           <div class="table-row">
-            <div class="label">Design Critique</div>
+            <div class="label">Brand consistency clinic</div>
             <div class="meta">Monday · 4:00 PM</div>
             <div class="pill warning">Limited seats</div>
           </div>
@@ -394,82 +429,82 @@
         <h2><span class="icon">🧭</span>Resource Finder</h2>
         <p>Search guides, forms, and playbooks.</p>
         <div class="search">
-          <input type="text" id="search" placeholder="Search resources (e.g. expense policy, onboarding)" aria-label="Search resources">
+          <input type="text" id="search" placeholder="Search resources (e.g. brand kit, spec sheet)" aria-label="Search resources">
         </div>
         <div class="resource-list" id="resources" aria-live="polite"></div>
       </div>
     </div>
 
-    <div class="card" style="margin-top: 18px;">
-      <h2><span class="icon">🛠️</span>Systems Status</h2>
-      <div class="grid columns-3">
-        <div class="announcement">
-          <div>
-            <strong>VPN</strong><br>
-            <span>Primary gateway healthy</span>
+      <div class="card" style="margin-top: 18px;">
+        <h2><span class="icon">🛠️</span>Systems Status</h2>
+        <div class="grid columns-3">
+          <div class="announcement">
+            <div>
+            <strong>Build line</strong><br>
+            <span>Production bays running to schedule</span>
+            </div>
+            <div class="pill success">Operational</div>
           </div>
-          <div class="pill success">Operational</div>
-        </div>
-        <div class="announcement">
-          <div>
-            <strong>File Storage</strong><br>
+          <div class="announcement">
+            <div>
+            <strong>Spec library</strong><br>
             <span>Maintenance window Fri 8pm</span>
+            </div>
+            <div class="pill warning">Scheduled</div>
           </div>
-          <div class="pill warning">Scheduled</div>
-        </div>
-        <div class="announcement">
-          <div>
-            <strong>Analytics</strong><br>
+          <div class="announcement">
+            <div>
+            <strong>Customer portal</strong><br>
             <span>Increased latency in EU region</span>
+            </div>
+            <div class="pill danger">Degraded</div>
           </div>
-          <div class="pill danger">Degraded</div>
-        </div>
-        <div class="announcement">
-          <div>
+          <div class="announcement">
+            <div>
             <strong>Mail</strong><br>
             <span>Queued deliveries cleared</span>
+            </div>
+            <div class="pill success">Operational</div>
           </div>
-          <div class="pill success">Operational</div>
-        </div>
-        <div class="announcement">
-          <div>
+          <div class="announcement">
+            <div>
             <strong>Chat</strong><br>
             <span>Rolling out message reactions</span>
+            </div>
+            <div class="pill info">Update</div>
           </div>
-          <div class="pill info">Update</div>
-        </div>
-        <div class="announcement">
-          <div>
+          <div class="announcement">
+            <div>
             <strong>Directory</strong><br>
             <span>New groups synced hourly</span>
+            </div>
+            <div class="pill success">Operational</div>
           </div>
-          <div class="pill success">Operational</div>
         </div>
       </div>
-    </div>
 
-    <div class="footer">Built for your team — customize links, add services, and pin announcements that matter most.</div>
+    <div class="footer">Premium in every sense — unify every touchpoint with the Truckcraft Bodies brand and customer-first service.</div>
   </div>
 
   <script>
     const resourceData = [
-      { title: 'Expense Policy', category: 'Finance', link: '#', tags: ['Travel', 'Meals'] },
-      { title: 'New Hire Onboarding', category: 'People Operations', link: '#', tags: ['Checklist', 'IT setup'] },
-      { title: 'Security Handbook', category: 'Security', link: '#', tags: ['Policies', 'Access'] },
-      { title: 'Brand Assets', category: 'Design', link: '#', tags: ['Logos', 'Templates'] },
-      { title: 'Remote Work Playbook', category: 'People Operations', link: '#', tags: ['Hybrid', 'Guides'] },
-      { title: 'Quarterly OKR Template', category: 'Leadership', link: '#', tags: ['Planning'] },
-      { title: 'Travel Request Form', category: 'Finance', link: '#', tags: ['Booking', 'Reimbursement'] },
-      { title: 'Incident Runbook', category: 'IT', link: '#', tags: ['Support', 'Outage'] },
+      { title: 'Brand Assets', category: 'Design', link: '#', tags: ['Logos', 'Patterns', 'Templates'] },
+      { title: 'Voice & Tone Guide', category: 'Marketing', link: '#', tags: ['Premium', 'Customer-first'] },
+      { title: 'Photography Direction', category: 'Brand', link: '#', tags: ['People', 'Vehicles'] },
+      { title: 'Build Specification Sheet', category: 'Engineering', link: '#', tags: ['Requirements', 'Approvals'] },
+      { title: 'Aftercare Playbook', category: 'Customer Success', link: '#', tags: ['Service', 'Maintenance'] },
+      { title: 'Safety Induction', category: 'Operations', link: '#', tags: ['Compliance', 'Training'] },
+      { title: 'Fleet Manager Kit', category: 'Sales', link: '#', tags: ['Pitch', 'FAQ'] },
+      { title: 'Travel & Expenses', category: 'People Operations', link: '#', tags: ['Policy', 'Form'] },
     ];
 
     const teamData = [
-      { team: 'People Operations', contact: 'Alex Rivera', email: 'alex@company.com', status: 'Available', badge: 'success' },
-      { team: 'IT Support', contact: 'Jordan Smith', email: 'it-support@company.com', status: 'On call', badge: 'info' },
-      { team: 'Finance', contact: 'Priya Shah', email: 'finance@company.com', status: 'EOD replies', badge: 'warning' },
-      { team: 'Facilities', contact: 'Taylor Lee', email: 'facilities@company.com', status: 'Available', badge: 'success' },
-      { team: 'Security', contact: 'Morgan Patel', email: 'security@company.com', status: 'Available', badge: 'success' },
-      { team: 'Design', contact: 'Samira Chen', email: 'design@company.com', status: 'Heads down', badge: 'warning' },
+      { team: 'Engineering', contact: 'Alex Rivera', email: 'engineering@truckcraft.com', status: 'Available', badge: 'success' },
+      { team: 'Customer Success', contact: 'Jordan Smith', email: 'success@truckcraft.com', status: 'On call', badge: 'info' },
+      { team: 'People Operations', contact: 'Priya Shah', email: 'people@truckcraft.com', status: 'EOD replies', badge: 'warning' },
+      { team: 'Brand & Marketing', contact: 'Samira Chen', email: 'brand@truckcraft.com', status: 'Reviewing assets', badge: 'warning' },
+      { team: 'Sales', contact: 'Taylor Lee', email: 'sales@truckcraft.com', status: 'Available', badge: 'success' },
+      { team: 'IT & Security', contact: 'Morgan Patel', email: 'security@truckcraft.com', status: 'Available', badge: 'success' },
     ];
 
     const resourcesEl = document.getElementById('resources');
