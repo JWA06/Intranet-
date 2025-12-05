@@ -1,4 +1,4 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -9,17 +9,17 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #0c1427;
-      --panel: #111b30;
-      --panel-light: #17233d;
-      --text: #f5f7fb;
-      --muted: #a3b2ce;
-      --accent: #87bee8;
-      --accent-2: #192c4d;
-      --accent-3: #a3ee3b;
-      --success: #9ee6a6;
-      --warning: #ffd166;
-      --danger: #f59e89;
+      --bg: #f2f5f9;
+      --panel: #ffffff;
+      --panel-light: #f7f9fc;
+      --text: #0f1728;
+      --muted: #4a5568;
+      --accent: #1b3d6b;
+      --accent-2: #5fa8d3;
+      --accent-3: #107f2f;
+      --success: #0f9d58;
+      --warning: #c26b00;
+      --danger: #c0392b;
       --radius: 14px;
     }
 
@@ -30,22 +30,10 @@
     body {
       margin: 0;
       min-height: 100vh;
-      background: linear-gradient(145deg, rgba(25, 44, 77, 0.72), rgba(12, 20, 39, 0.95)), var(--bg);
+      background: var(--bg);
       color: var(--text);
       font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    }
-
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image:
-        radial-gradient(circle at 12% 20%, rgba(135, 190, 232, 0.18), transparent 32%),
-        radial-gradient(circle at 85% 8%, rgba(163, 238, 59, 0.12), transparent 28%),
-        radial-gradient(circle at 70% 72%, rgba(25, 44, 77, 0.35), transparent 26%),
-        repeating-linear-gradient(135deg, rgba(135, 190, 232, 0.08) 0 12px, transparent 12px 24px);
-      pointer-events: none;
-      z-index: -1;
+      line-height: 1.7;
     }
 
     .hidden {
@@ -61,21 +49,19 @@
       inset: 0;
       display: grid;
       place-items: center;
-      background: radial-gradient(circle at 40% 20%, rgba(135, 190, 232, 0.18), transparent 35%),
-        linear-gradient(180deg, rgba(12, 20, 39, 0.92), rgba(12, 20, 39, 0.98));
+      background: rgba(15, 23, 40, 0.4);
       padding: 20px;
       z-index: 10;
     }
 
     .gate-panel {
-      background: linear-gradient(135deg, rgba(17, 27, 48, 0.94), rgba(25, 44, 77, 0.88));
-      border: 1px solid rgba(135, 190, 232, 0.28);
+      background: var(--panel);
+      border: 1px solid #d6deea;
       border-radius: 18px;
-      padding: 24px;
-      max-width: 440px;
+      padding: 28px;
+      max-width: 540px;
       width: 100%;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
-      backdrop-filter: blur(8px);
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.12);
     }
 
     .gate-header {
@@ -88,11 +74,11 @@
 
     .gate-badge {
       background: rgba(163, 238, 59, 0.14);
-      color: #d8ffd6;
-      padding: 6px 10px;
+      color: var(--success);
+      padding: 8px 12px;
       border-radius: 10px;
-      border: 1px solid rgba(163, 238, 59, 0.4);
-      font-size: 12px;
+      border: 1px solid #bfe7d0;
+      font-size: 13px;
       letter-spacing: 0.4px;
       text-transform: uppercase;
       font-weight: 700;
@@ -100,32 +86,32 @@
 
     .gate h1 {
       margin: 0;
-      font-size: 22px;
+      font-size: 24px;
       font-family: 'Barlow Condensed', 'Inter', system-ui, sans-serif;
       letter-spacing: 0.5px;
     }
 
     .gate p {
       color: var(--muted);
-      margin: 4px 0 12px;
-      line-height: 1.5;
-      font-size: 14px;
+      margin: 8px 0 16px;
+      line-height: 1.6;
+      font-size: 16px;
     }
 
     .gate form {
       display: grid;
-      gap: 12px;
+      gap: 16px;
     }
 
     .gate .steps {
-      background: rgba(17, 27, 48, 0.7);
-      border: 1px solid rgba(135, 190, 232, 0.2);
+      background: var(--panel-light);
+      border: 1px solid #d6deea;
       border-radius: 12px;
-      padding: 12px;
+      padding: 14px;
       margin-top: 4px;
       color: var(--muted);
-      font-size: 13px;
-      line-height: 1.5;
+      font-size: 14px;
+      line-height: 1.6;
     }
 
     .gate .steps strong {
@@ -144,54 +130,54 @@
     .gate label {
       display: grid;
       gap: 6px;
-      font-weight: 600;
+      font-weight: 700;
       color: var(--text);
-      font-size: 14px;
+      font-size: 15px;
     }
 
     .gate input {
-      background: var(--panel-light);
-      border: 1px solid rgba(135, 190, 232, 0.3);
+      background: #fff;
+      border: 1px solid #c8d4e5;
       border-radius: 12px;
-      padding: 12px;
+      padding: 14px;
       color: var(--text);
-      font-size: 15px;
+      font-size: 16px;
       outline: none;
       transition: border-color 0.2s ease, box-shadow 0.2s ease;
     }
 
     .gate input:focus {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(135, 190, 232, 0.2);
+      border-color: var(--accent-2);
+      box-shadow: 0 0 0 3px rgba(31, 82, 132, 0.15);
     }
 
     .gate button {
       padding: 14px 12px;
-      background: linear-gradient(135deg, #87bee8, #5ca6d8);
-      color: #0b172b;
+      background: var(--accent);
+      color: #f7f9fc;
       border: none;
       border-radius: 12px;
       font-weight: 800;
       letter-spacing: 0.3px;
       cursor: pointer;
-      box-shadow: 0 10px 25px rgba(135, 190, 232, 0.25);
+      box-shadow: 0 10px 25px rgba(27, 61, 107, 0.2);
       transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
 
     .gate button:hover {
       transform: translateY(-1px);
-      box-shadow: 0 14px 28px rgba(135, 190, 232, 0.32);
+      box-shadow: 0 14px 28px rgba(27, 61, 107, 0.24);
     }
 
     .gate .error {
-      color: #f59e89;
+      color: var(--danger);
       margin: 4px 0 0;
-      font-size: 13px;
-      min-height: 18px;
+      font-size: 14px;
+      min-height: 20px;
     }
 
     .gate .helper {
-      font-size: 13px;
+      font-size: 14px;
       color: var(--muted);
       margin: 6px 0 0;
     }
@@ -223,9 +209,9 @@
     }
 
     .page {
-      max-width: 1200px;
+      max-width: 1080px;
       margin: 0 auto;
-      padding: 32px 20px 48px;
+      padding: 28px 16px 48px;
     }
 
     header {
@@ -233,7 +219,7 @@
       grid-template-columns: 1fr auto;
       gap: 16px;
       align-items: center;
-      margin-bottom: 28px;
+      margin-bottom: 20px;
     }
 
     header .title {
@@ -244,19 +230,19 @@
 
     header h1 {
       margin: 0;
-      font-size: 30px;
+      font-size: 32px;
       font-family: 'Barlow Condensed', 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
       letter-spacing: 0.3px;
-      font-weight: 700;
+      font-weight: 800;
     }
 
     header .badge {
-      background: linear-gradient(135deg, rgba(135, 190, 232, 0.22), rgba(25, 44, 77, 0.6));
-      color: #0b172b;
+      background: #e7eff8;
+      color: var(--accent);
       padding: 8px 12px;
       border-radius: var(--radius);
       font-weight: 700;
-      border: 1px solid rgba(135, 190, 232, 0.5);
+      border: 1px solid #c8d4e5;
       text-transform: uppercase;
       letter-spacing: 0.4px;
     }
@@ -264,7 +250,7 @@
     header .datetime {
       text-align: right;
       color: var(--muted);
-      font-size: 14px;
+      font-size: 15px;
     }
 
     .grid {
@@ -273,74 +259,69 @@
     }
 
     .grid.columns-3 {
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     }
 
     .grid.columns-2 {
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     }
 
     .card {
-      background: linear-gradient(145deg, rgba(17, 27, 48, 0.92), rgba(12, 20, 39, 0.9));
-      border: 1px solid rgba(135, 190, 232, 0.12);
+      background: var(--panel);
+      border: 1px solid #d6deea;
       border-radius: var(--radius);
       padding: 18px;
-      box-shadow: 0 20px 60px rgba(5, 8, 14, 0.55);
-      backdrop-filter: blur(6px);
+      box-shadow: 0 12px 32px rgba(15, 23, 40, 0.08);
     }
 
     .card h2 {
       margin: 0 0 12px;
-      font-size: 18px;
+      font-size: 20px;
       display: flex;
       align-items: center;
       gap: 10px;
     }
 
     .card h2 span.icon {
-      width: 32px;
-      height: 32px;
+      width: 36px;
+      height: 36px;
       display: grid;
       place-items: center;
-      background: rgba(135, 190, 232, 0.16);
+      background: #e7eff8;
       color: var(--accent);
       border-radius: 10px;
-      border: 1px solid rgba(135, 190, 232, 0.35);
+      border: 1px solid #c8d4e5;
       font-size: 16px;
     }
 
     .card p {
       margin: 0;
       color: var(--muted);
-      line-height: 1.5;
-      font-size: 14px;
+      line-height: 1.6;
+      font-size: 15px;
     }
 
     .hero {
       padding: 22px;
-      border: 1px solid rgba(135, 190, 232, 0.35);
-      background: linear-gradient(135deg, rgba(25, 44, 77, 0.9), rgba(135, 190, 232, 0.14));
+      border: 1px solid #d6deea;
+      background: var(--panel-light);
       position: relative;
       overflow: hidden;
     }
 
     .hero::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 78% 30%, rgba(163, 238, 59, 0.2), transparent 32%);
-      pointer-events: none;
+      display: none;
     }
 
     .hero h2 {
-      font-size: 22px;
+      font-size: 24px;
       font-family: 'Barlow Condensed', 'Inter', system-ui, sans-serif;
       letter-spacing: 0.4px;
     }
 
     .hero .tagline {
       font-size: 18px;
-      margin: 6px 0 14px;
+      margin: 8px 0 14px;
       font-family: 'Barlow Condensed', 'Inter', system-ui, sans-serif;
       letter-spacing: 0.4px;
     }
@@ -353,20 +334,20 @@
     }
 
     .chip {
-      background: var(--panel-light);
-      padding: 8px 10px;
+      background: #e7eff8;
+      padding: 10px 12px;
       border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.06);
+      border: 1px solid #c8d4e5;
       color: var(--muted);
-      font-size: 13px;
+      font-size: 14px;
       display: inline-flex;
       align-items: center;
       gap: 6px;
     }
 
     .chip .dot {
-      width: 8px;
-      height: 8px;
+      width: 10px;
+      height: 10px;
       border-radius: 50%;
       background: var(--accent);
       display: inline-block;
@@ -408,23 +389,23 @@
     .pill {
       padding: 6px 10px;
       border-radius: 999px;
-      font-size: 12px;
-      font-weight: 600;
+      font-size: 13px;
+      font-weight: 700;
       display: inline-flex;
       align-items: center;
       gap: 6px;
     }
 
-    .pill.success { background: rgba(163, 238, 59, 0.14); color: #d2ffa1; }
-    .pill.warning { background: rgba(255, 209, 102, 0.16); color: #ffe7aa; }
-    .pill.info { background: rgba(135, 190, 232, 0.14); color: #d5ecff; }
-    .pill.danger { background: rgba(245, 94, 94, 0.16); color: #ffd7d1; }
+    .pill.success { background: #e6f4ea; color: var(--success); border: 1px solid #c4e3cd; }
+    .pill.warning { background: #fff4e5; color: var(--warning); border: 1px solid #ffd9a1; }
+    .pill.info { background: #e7eff8; color: var(--accent); border: 1px solid #c8d4e5; }
+    .pill.danger { background: #fdecea; color: var(--danger); border: 1px solid #f5c6c1; }
 
     .announcement {
       padding: 12px;
       background: var(--panel-light);
       border-radius: 10px;
-      border: 1px solid rgba(135, 190, 232, 0.08);
+      border: 1px solid #d6deea;
       display: grid;
       grid-template-columns: 1fr auto;
       gap: 8px;
@@ -450,10 +431,10 @@
       grid-template-columns: 1fr 1fr auto;
       gap: 10px;
       align-items: center;
-      padding: 10px;
+      padding: 12px;
       background: var(--panel-light);
       border-radius: 10px;
-      border: 1px solid rgba(135, 190, 232, 0.08);
+      border: 1px solid #d6deea;
     }
 
     .table-row .label { color: var(--text); font-weight: 600; }
@@ -466,12 +447,12 @@
 
     .search input {
       width: 100%;
-      padding: 12px 14px;
+      padding: 14px 14px;
       border-radius: 10px;
-      border: 1px solid rgba(135, 190, 232, 0.12);
-      background: var(--panel-light);
+      border: 1px solid #c8d4e5;
+      background: #fff;
       color: var(--text);
-      font-size: 14px;
+      font-size: 15px;
       outline: none;
     }
 
@@ -537,18 +518,18 @@
       </div>
       <div class="datetime">
         <div id="datetime"></div>
-        <div id="auth-meta" style="margin-top: 4px; color: var(--muted); font-size: 12px;">Staff gate active</div>
+        <div id="auth-meta" style="margin-top: 4px; color: var(--muted); font-size: 14px;">Staff gate active</div>
       </div>
     </header>
 
     <section class="card hero">
-      <h2><span class="icon">⚡</span>Welcome to the Truckcraft hub</h2>
-      <div class="tagline">Premium in <em style="font-style: italic; color: var(--accent);">every sense</em> — crafted for leaders who expect the best.</div>
-      <p>Stay aligned with production updates, customer-first communications, and the tools that keep our builds moving. Staff-only access is enforced for security.</p>
+      <h2><span class="icon">⚡</span>Truckcraft intranet</h2>
+      <div class="tagline">Simple daily tools for every teammate.</div>
+      <p>Use the buttons below to reach our most common systems, check today’s notes, and see who’s available. Clear text, high contrast, and large touch targets keep things friendly for everyone.</p>
       <div class="chips">
-        <div class="chip"><span class="dot"></span>Space Blue & Maya Blue theme enabled</div>
-        <div class="chip"><span class="dot" style="background: var(--warning);"></span>Quarterly build review · May 31</div>
-        <div class="chip"><span class="dot" style="background: var(--accent-3);"></span>Customer-first service pledge live</div>
+        <div class="chip"><span class="dot"></span>Designed for easy reading</div>
+        <div class="chip"><span class="dot" style="background: var(--warning);"></span>Need help? Contact Service Desk</div>
+        <div class="chip"><span class="dot" style="background: var(--accent-3);"></span>Staff-only access is active</div>
       </div>
     </section>
 
