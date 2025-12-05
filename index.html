@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -117,6 +117,30 @@
       gap: 12px;
     }
 
+    .gate .steps {
+      background: rgba(17, 27, 48, 0.7);
+      border: 1px solid rgba(135, 190, 232, 0.2);
+      border-radius: 12px;
+      padding: 12px;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .gate .steps strong {
+      color: var(--text);
+    }
+
+    .gate .step-list {
+      padding-left: 18px;
+      margin: 8px 0 0;
+    }
+
+    .gate .step-list li {
+      margin: 4px 0;
+    }
+
     .gate label {
       display: grid;
       gap: 6px;
@@ -170,6 +194,32 @@
       font-size: 13px;
       color: var(--muted);
       margin: 6px 0 0;
+    }
+
+    .gate .helper-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .gate .chip {
+      border: 1px solid rgba(135, 190, 232, 0.3);
+      background: rgba(135, 190, 232, 0.08);
+      color: var(--text);
+      padding: 8px 10px;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: border-color 0.15s ease, background 0.15s ease;
+    }
+
+    .gate .chip:hover {
+      border-color: var(--accent);
+      background: rgba(135, 190, 232, 0.14);
     }
 
     .page {
@@ -458,7 +508,20 @@
         </label>
         <button type="submit">Unlock intranet</button>
         <div class="error" id="gate-error" role="alert"></div>
-        <div class="helper">Lost the code? Contact IT &amp; Security to reset access.</div>
+        <div class="helper">Follow these quick steps so everyone—including less technical team members—can sign in smoothly:</div>
+        <div class="steps" aria-live="polite">
+          <strong>Step-by-step</strong>
+          <ol class="step-list">
+            <li>Type your Truckcraft email address (ends with @truckcraftbodies.co.uk or @truckcraft.com).</li>
+            <li>Enter the current staff access code shared by IT &amp; Security.</li>
+            <li>Press “Unlock intranet.” We’ll remember you on this device for 8 hours.</li>
+          </ol>
+          <div class="helper-actions">
+            <button type="button" class="chip" id="fill-default-code" aria-label="Fill the temporary access code">🔓 Fill temporary code</button>
+            <span class="chip" aria-live="polite">Need help? Call reception and ask for the Truckcraft intranet code.</span>
+          </div>
+        </div>
+        <div class="helper">Lost the code? Contact IT &amp; Security to reset access. For now, you can use the temporary code button above.</div>
       </form>
     </div>
   </div>
@@ -640,6 +703,7 @@
     const SESSION_KEY = 'tcb_staff_session';
     const SESSION_TTL = 8 * 60 * 60 * 1000; // 8 hours
     const ACCESS_CODE_HASH = '291c82c92e1c903d74ba42ace63d9d51ac416f092b1e27cf0584a26942e6e990';
+    const DEFAULT_CODE = 'premium-in-every-sense';
     const allowedDomains = ['truckcraftbodies.co.uk', 'truckcraft.com'];
 
     const gateEl = document.getElementById('access-gate');
@@ -647,6 +711,7 @@
     const gateEmail = document.getElementById('gate-email');
     const gateCode = document.getElementById('gate-code');
     const gateError = document.getElementById('gate-error');
+    const gateFillDefault = document.getElementById('fill-default-code');
     const appContent = document.getElementById('app-content');
     const authMeta = document.getElementById('auth-meta');
 
@@ -746,6 +811,15 @@
 
         persistSession(email);
         unlock(email);
+      });
+    }
+
+    if (gateFillDefault && gateCode) {
+      gateFillDefault.addEventListener('click', () => {
+        gateCode.value = DEFAULT_CODE;
+        gateCode.focus();
+        gateCode.setSelectionRange(gateCode.value.length, gateCode.value.length);
+        if (gateError) gateError.textContent = 'Temporary code filled—press Unlock intranet to continue.';
       });
     }
 
@@ -857,5 +931,3 @@
   </script>
 </body>
 </html>
-serve.sh
-New
