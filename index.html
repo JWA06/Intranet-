@@ -39,13 +39,137 @@
       content: '';
       position: fixed;
       inset: 0;
-      background-image: 
+      background-image:
         radial-gradient(circle at 12% 20%, rgba(135, 190, 232, 0.18), transparent 32%),
         radial-gradient(circle at 85% 8%, rgba(163, 238, 59, 0.12), transparent 28%),
         radial-gradient(circle at 70% 72%, rgba(25, 44, 77, 0.35), transparent 26%),
         repeating-linear-gradient(135deg, rgba(135, 190, 232, 0.08) 0 12px, transparent 12px 24px);
       pointer-events: none;
       z-index: -1;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    body.locked {
+      overflow: hidden;
+    }
+
+    .gate {
+      position: fixed;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      background: radial-gradient(circle at 40% 20%, rgba(135, 190, 232, 0.18), transparent 35%),
+        linear-gradient(180deg, rgba(12, 20, 39, 0.92), rgba(12, 20, 39, 0.98));
+      padding: 20px;
+      z-index: 10;
+    }
+
+    .gate-panel {
+      background: linear-gradient(135deg, rgba(17, 27, 48, 0.94), rgba(25, 44, 77, 0.88));
+      border: 1px solid rgba(135, 190, 232, 0.28);
+      border-radius: 18px;
+      padding: 24px;
+      max-width: 440px;
+      width: 100%;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+      backdrop-filter: blur(8px);
+    }
+
+    .gate-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .gate-badge {
+      background: rgba(163, 238, 59, 0.14);
+      color: #d8ffd6;
+      padding: 6px 10px;
+      border-radius: 10px;
+      border: 1px solid rgba(163, 238, 59, 0.4);
+      font-size: 12px;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .gate h1 {
+      margin: 0;
+      font-size: 22px;
+      font-family: 'Barlow Condensed', 'Inter', system-ui, sans-serif;
+      letter-spacing: 0.5px;
+    }
+
+    .gate p {
+      color: var(--muted);
+      margin: 4px 0 12px;
+      line-height: 1.5;
+      font-size: 14px;
+    }
+
+    .gate form {
+      display: grid;
+      gap: 12px;
+    }
+
+    .gate label {
+      display: grid;
+      gap: 6px;
+      font-weight: 600;
+      color: var(--text);
+      font-size: 14px;
+    }
+
+    .gate input {
+      background: var(--panel-light);
+      border: 1px solid rgba(135, 190, 232, 0.3);
+      border-radius: 12px;
+      padding: 12px;
+      color: var(--text);
+      font-size: 15px;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .gate input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(135, 190, 232, 0.2);
+    }
+
+    .gate button {
+      padding: 14px 12px;
+      background: linear-gradient(135deg, #87bee8, #5ca6d8);
+      color: #0b172b;
+      border: none;
+      border-radius: 12px;
+      font-weight: 800;
+      letter-spacing: 0.3px;
+      cursor: pointer;
+      box-shadow: 0 10px 25px rgba(135, 190, 232, 0.25);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .gate button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 28px rgba(135, 190, 232, 0.32);
+    }
+
+    .gate .error {
+      color: #f59e89;
+      margin: 4px 0 0;
+      font-size: 13px;
+      min-height: 18px;
+    }
+
+    .gate .helper {
+      font-size: 13px;
+      color: var(--muted);
+      margin: 6px 0 0;
     }
 
     .page {
@@ -316,7 +440,30 @@
   </style>
 </head>
 <body>
-  <div class="page">
+  <div id="access-gate" class="gate">
+    <div class="gate-panel" role="dialog" aria-modal="true" aria-labelledby="gate-title">
+      <div class="gate-header">
+        <h1 id="gate-title">Truckcraft Bodies · Staff access</h1>
+        <div class="gate-badge">Internal use</div>
+      </div>
+      <p>For security, please confirm your Truckcraft email and the current staff access code before using the intranet.</p>
+      <form id="gate-form">
+        <label>
+          Truckcraft email
+          <input id="gate-email" name="email" type="email" autocomplete="email" placeholder="you@truckcraftbodies.co.uk" required>
+        </label>
+        <label>
+          Access code
+          <input id="gate-code" name="code" type="password" autocomplete="current-password" placeholder="Enter the shared code" required>
+        </label>
+        <button type="submit">Unlock intranet</button>
+        <div class="error" id="gate-error" role="alert"></div>
+        <div class="helper">Lost the code? Contact IT &amp; Security to reset access.</div>
+      </form>
+    </div>
+  </div>
+
+  <div id="app-content" class="page hidden" aria-hidden="true">
     <header>
       <div class="title">
         <div class="badge">Truckcraft Bodies</div>
@@ -325,13 +472,16 @@
           <div style="color: var(--muted); font-size: 14px;">A product by 7th Day Media · The logical choice for a job well done.</div>
         </div>
       </div>
-      <div class="datetime" id="datetime"></div>
+      <div class="datetime">
+        <div id="datetime"></div>
+        <div id="auth-meta" style="margin-top: 4px; color: var(--muted); font-size: 12px;">Staff gate active</div>
+      </div>
     </header>
 
     <section class="card hero">
       <h2><span class="icon">⚡</span>Welcome to the Truckcraft hub</h2>
       <div class="tagline">Premium in <em style="font-style: italic; color: var(--accent);">every sense</em> — crafted for leaders who expect the best.</div>
-      <p>Stay aligned with production updates, customer-first communications, and the tools that keep our builds moving.</p>
+      <p>Stay aligned with production updates, customer-first communications, and the tools that keep our builds moving. Staff-only access is enforced for security.</p>
       <div class="chips">
         <div class="chip"><span class="dot"></span>Space Blue & Maya Blue theme enabled</div>
         <div class="chip"><span class="dot" style="background: var(--warning);"></span>Quarterly build review · May 31</div>
@@ -487,6 +637,125 @@
   </div>
 
   <script>
+    const SESSION_KEY = 'tcb_staff_session';
+    const SESSION_TTL = 8 * 60 * 60 * 1000; // 8 hours
+    const ACCESS_CODE_HASH = '291c82c92e1c903d74ba42ace63d9d51ac416f092b1e27cf0584a26942e6e990';
+    const allowedDomains = ['truckcraftbodies.co.uk', 'truckcraft.com'];
+
+    const gateEl = document.getElementById('access-gate');
+    const gateForm = document.getElementById('gate-form');
+    const gateEmail = document.getElementById('gate-email');
+    const gateCode = document.getElementById('gate-code');
+    const gateError = document.getElementById('gate-error');
+    const appContent = document.getElementById('app-content');
+    const authMeta = document.getElementById('auth-meta');
+
+    function emailIsAllowed(email) {
+      const normalized = email.trim().toLowerCase();
+      return allowedDomains.some(domain => normalized.endsWith(`@${domain}`));
+    }
+
+    async function hashString(value) {
+      const encoder = new TextEncoder();
+      const buffer = await crypto.subtle.digest('SHA-256', encoder.encode(value));
+      return Array.from(new Uint8Array(buffer)).map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    function setAuthMeta(email = '') {
+      if (!authMeta) return;
+      authMeta.textContent = email ? `Signed in as ${email}` : 'Staff gate active';
+      authMeta.style.color = email ? 'var(--accent)' : 'var(--muted)';
+    }
+
+    function persistSession(email) {
+      try {
+        localStorage.setItem(SESSION_KEY, JSON.stringify({ email, timestamp: Date.now() }));
+      } catch (err) {
+        console.warn('Unable to persist session', err);
+      }
+    }
+
+    function clearSession() {
+      try {
+        localStorage.removeItem(SESSION_KEY);
+      } catch (err) {
+        console.warn('Unable to clear session', err);
+      }
+    }
+
+    function loadSession() {
+      try {
+        const raw = localStorage.getItem(SESSION_KEY);
+        if (!raw) return null;
+        const data = JSON.parse(raw);
+        const isFresh = Date.now() - data.timestamp < SESSION_TTL;
+        if (data.email && emailIsAllowed(data.email) && isFresh) {
+          return data;
+        }
+        clearSession();
+      } catch (err) {
+        console.warn('Unable to load session', err);
+      }
+      return null;
+    }
+
+    function showGate(message = '') {
+      if (gateEl) gateEl.classList.remove('hidden');
+      if (appContent) {
+        appContent.classList.add('hidden');
+        appContent.setAttribute('aria-hidden', 'true');
+      }
+      document.body.classList.add('locked');
+      setAuthMeta('');
+      if (gateError) gateError.textContent = message;
+      if (gateEmail) gateEmail.focus();
+    }
+
+    function unlock(email) {
+      if (gateEl) gateEl.classList.add('hidden');
+      if (appContent) {
+        appContent.classList.remove('hidden');
+        appContent.setAttribute('aria-hidden', 'false');
+      }
+      document.body.classList.remove('locked');
+      if (gateError) gateError.textContent = '';
+      setAuthMeta(email);
+    }
+
+    if (gateForm) {
+      gateForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const email = (gateEmail?.value || '').trim().toLowerCase();
+        const code = (gateCode?.value || '').trim();
+
+        if (!emailIsAllowed(email)) {
+          if (gateError) gateError.textContent = 'Use your Truckcraft email to continue.';
+          return;
+        }
+
+        if (!code) {
+          if (gateError) gateError.textContent = 'Enter the staff access code provided by IT & Security.';
+          return;
+        }
+
+        const hashed = await hashString(code);
+        if (hashed !== ACCESS_CODE_HASH) {
+          if (gateError) gateError.textContent = 'Invalid access code. Request a reset from IT & Security.';
+          return;
+        }
+
+        persistSession(email);
+        unlock(email);
+      });
+    }
+
+    const existingSession = loadSession();
+    if (existingSession) {
+      unlock(existingSession.email);
+    } else {
+      showGate();
+    }
+
     const resourceData = [
       { title: 'Brand Assets', category: 'Design', link: '#', tags: ['Logos', 'Patterns', 'Templates'] },
       { title: 'Voice & Tone Guide', category: 'Marketing', link: '#', tags: ['Premium', 'Customer-first'] },
@@ -588,3 +857,5 @@
   </script>
 </body>
 </html>
+serve.sh
+New
